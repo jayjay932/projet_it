@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter une Formation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_nav.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_footer.css') }}">
+</head>
+<body>
+    {% include 'nav.html' %}
+    <h1>Ajouter une Formation</h1>
+    <form action="/admin/add_formation" method="POST">
+        <label for="title">Titre :</label>
+        <input type="text" id="title" name="title" required>
+        <br>
+        <label for="description">Description :</label>
+        <textarea id="description" name="description" required></textarea>
+        <br>
+        <label for="domain">Domaine :</label>
+        <select id="domain" name="domain" required>
+            <option value="Développement Web">Développement Web</option>
+            <option value="Intelligence Artificielle">Intelligence Artificielle</option>
+            <option value="Finance et Comptabilité">Finance et Comptabilité</option>
+            <option value="Marketing Digital">Marketing Digital</option>
+            <option value="Santé et Bien-être">Santé et Bien-être</option>
+        </select>
+        <br>
+        <label for="type">Type :</label>
+        <select id="type" name="type" required>
+            <option value="video">Vidéo</option>
+            <option value="pdf">PDF</option>
+        </select>
+        <br>
+        <label for="link">Lien :</label>
+        <input type="url" id="link" name="link" required>
+        <br>
+        <button type="submit">Ajouter</button>
+    </form>
+    <a href="/admin">Retour au tableau de bord</a>
+    {% include 'footer.html' %}
+</body>
+</html>

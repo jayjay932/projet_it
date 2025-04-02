@@ -1,0 +1,41 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style_nav.css') }}">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <div class="container-fluid">
+        <!-- Logo ou nom de la plateforme -->
+        <a class="navbar-brand fw-bold" href="{{ url_for('dashboard') }}">
+            <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Logo" width="40" height="40" class="d-inline-block align-text-top">
+            E-Learning Platform
+        </a>
+        <!-- Bouton pour mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Liens de navigation -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center">
+                {% if current_user.is_authenticated %}
+                    <!-- Utilisateur connecté -->
+                    <li class="nav-item">
+                        <a class="nav-link active fw-semibold" href="{{ url_for('dashboard') }}">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="{{ url_for('logout') }}">Déconnexion</a>
+                    </li>
+                    <li class="nav-item">
+                        <span class="navbar-text text-white ms-3 fw-light">
+                            <i class="bi bi-person-circle"></i> Connecté en tant que : <strong>{{ current_user.name }}</strong>
+                        </span>
+                    </li>
+                {% else %}
+                    <!-- Utilisateur non connecté -->
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="{{ url_for('login') }}">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="{{ url_for('register') }}">Sign Up</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

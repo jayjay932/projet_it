@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Inscription</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_nav.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_footer.css') }}">
+</head>
+<body class="container mt-5">
+    {% include 'nav.html' %}
+    <h2>Inscription</h2>
+    <form method="POST">
+        <input type="text" name="name" class="form-control my-2" placeholder="Nom" required>
+        <input type="email" name="email" class="form-control my-2" placeholder="Email" required>
+        <input type="password" name="password" class="form-control my-2" placeholder="Mot de passe" required>
+        <button type="submit" class="btn btn-primary">S'inscrire</button>
+    </form>
+    <p class="mt-3">Déjà inscrit ? <a href="{{ url_for('login') }}">Connexion</a></p>
+    {% include 'footer.html' %}
+</body>
+</html>

@@ -1,0 +1,87 @@
+/* Style général de la barre de navigation */
+.navbar {
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(90deg, #007bff, #0056b3); /* Dégradé bleu */
+    padding: 10px 20px;
+}
+
+/* Logo dans la barre de navigation */
+.navbar-brand img {
+    border-radius: 50%;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.navbar-brand img:hover {
+    transform: scale(1.1); /* Zoom léger au survol */
+}
+
+/* Liens de navigation */
+.navbar-nav .nav-link {
+    color: white;
+    font-weight: 500;
+    margin: 0 10px;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ffdd57; /* Couleur jaune pour le survol */
+    transform: translateY(-2px); /* Légère élévation au survol */
+}
+
+/* Texte de l'utilisateur connecté */
+.navbar-text {
+    font-size: 0.9rem;
+    color: #f8f9fa;
+    font-style: italic;
+}
+
+.navbar-text strong {
+    color: #ffdd57; /* Couleur jaune pour le nom de l'utilisateur */
+}
+
+/* Bouton mobile */
+.navbar-toggler {
+    border: none;
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.navbar-toggler-icon {
+    background-color: #007bff;
+    border-radius: 2px;
+    width: 20px;
+    height: 2px;
+    display: block;
+    margin: 4px auto;
+    content: '';
+}
+
+/* Ombre subtile */
+.shadow-sm {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Menu déroulant */
+.navbar .dropdown-menu {
+    background-color: #f8f9fa; /* Couleur de fond claire */
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre subtile */
+}
+
+.navbar .dropdown-item {
+    color: #333;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar .dropdown-item:hover {
+    background-color: #007bff; /* Fond bleu au survol */
+    color: white; /* Texte blanc au survol */
+}
+
+.navbar .dropdown-divider {
+    border-color: #ddd;
+}

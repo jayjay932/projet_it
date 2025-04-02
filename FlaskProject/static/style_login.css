@@ -1,0 +1,82 @@
+body,
+.message,
+.form,
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+body {
+    height: 100vh;
+    background: #e8e8e8;
+    font-family: "Source Sans Pro", sans-serif;
+    overflow: hidden;
+}
+
+.container {
+    width: 700px;
+    height: 400px;
+    background: white;
+    position: relative;
+    display: grid;
+    grid-template: 100% / 50% 50%;
+    box-shadow: 2px 2px 10px 0 rgba(51, 51, 51, 0.2);
+}
+
+.message {
+    position: absolute;
+    background: white;
+    width: 50%;
+    height: 100%;
+    transition: 0.5s all ease;
+    transform: translateX(100%);
+    z-index: 4;
+}
+
+.signup .message {
+    transform: translateX(100%);
+}
+
+.login .message {
+    transform: translateX(0);
+}
+
+.form {
+    width: 100%;
+    height: 100%;
+}
+
+.form--heading {
+    font-size: 25px;
+    height: 50px;
+    color: #129D72;
+}
+
+form {
+    width: 70%;
+}
+
+input {
+    width: 90%;
+    border: 0;
+    border-bottom: 1px solid #aaa;
+    font-size: 13px;
+    font-weight: 300;
+    color: #797a9e;
+    letter-spacing: 0.11em;
+}
+
+.button {
+    width: 100%;
+    height: 30px;
+    border: 0;
+    outline: 0;
+    color: white;
+    font-size: 15px;
+    font-weight: 400;
+    background: #129D72;
+    cursor: pointer;
+}
+

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_nav.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_footer.css') }}">
+</head>
+<body>
+    {% include 'nav.html' %}
+    <h1>Bienvenue, Admin {{ name }}</h1>
+    <p>Voici votre tableau de bord administrateur.</p>
+
+    <a href="/admin/add_formation_page">Ajouter une nouvelle formation</a>
+    <br>
+    <a href="/formations/Développement Web">Voir les formations en Développement Web</a>
+    <br>
+    <a href="/logout">Se déconnecter</a> <!-- Lien pour la déconnexion -->
+    {% include 'footer.html' %}
+</body>
+</html>

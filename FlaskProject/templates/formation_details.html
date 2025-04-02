@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ formation.title }}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_nav.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_footer.css') }}">
+</head>
+<body>
+    {% include 'nav.html' %}
+    <div class="container mt-5">
+        <h1 class="text-primary">{{ formation.title }}</h1>
+        <p class="text-muted">{{ formation.description }}</p>
+        <p><strong>Domaine :</strong> {{ formation.domain }}</p>
+        {% if formation.type == 'video' %}
+        <div class="ratio ratio-16x9">
+            <iframe src="{{ formation.link }}" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <p class="card-text"><strong>Durée :</strong> {{ formation.duration }}</p>
+        {% elif formation.type == 'pdf' %}
+        <a href="{{ formation.link }}" class="btn btn-success mt-3" target="_blank">Télécharger le PDF</a>
+        {% endif %}
+        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary mt-3">Retour</a>
+    </div>
+    {% include 'footer.html' %}
+</body>
+</html>

@@ -1,0 +1,52 @@
+/* Style général de la barre de navigation */
+.navbar {
+    background-color: #4CAF50; /* Couleur principale */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre subtile */
+}
+
+.navbar-brand {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+.navbar-brand img {
+    margin-right: 10px;
+    border-radius: 50%; /* Logo arrondi */
+}
+
+.navbar-nav .nav-link {
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #d4f1d4; /* Couleur au survol */
+}
+
+.navbar-text {
+    font-size: 14px;
+    color: white;
+}
+
+/* Bouton mobile */
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.7%29' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .navbar-nav {
+        text-align: center;
+    }
+
+    .navbar-nav .nav-item {
+        margin-bottom: 10px;
+    }
+}

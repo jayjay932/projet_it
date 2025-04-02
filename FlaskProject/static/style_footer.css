@@ -1,0 +1,43 @@
+/* Style général du footer */
+footer {
+    background: linear-gradient(90deg, #343a40, #212529); /* Dégradé sombre */
+    color: white;
+    padding: 20px 0;
+    font-size: 0.9rem;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1); /* Ombre subtile */
+}
+
+/* Texte principal */
+footer p {
+    margin: 0;
+    padding: 5px 0;
+}
+
+/* Liens des politiques */
+footer a {
+    color: #ffdd57; /* Couleur jaune pour les liens */
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+footer a:hover {
+    color: #ffffff; /* Blanc au survol */
+    text-decoration: underline;
+}
+
+/* Icônes des réseaux sociaux */
+footer .social-icons a {
+    font-size: 1.5rem;
+    margin: 0 10px;
+    color: #ffdd57; /* Couleur jaune par défaut */
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+footer .social-icons a:hover {
+    transform: scale(1.2); /* Zoom au survol */
+    color: #ffffff; /* Blanc au survol */
+}
+
+/* Espacement entre les sections */
+footer .social-icons {
+    margin-top: 10px;
+}
