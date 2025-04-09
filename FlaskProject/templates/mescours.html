@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Cours</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    {% include 'nav.html' %}
+    <div class="container mt-5">
+        <h2 class="text-secondary mb-4">Mes Cours</h2>
+        <div class="row">
+            {% if formations %}
+            {% for formation in formations %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h3 class="card-title text-dark">{{ formation.title }}</h3>
+                        <p class="card-text text-muted">{{ formation.description }}</p>
+                        <p class="card-text"><strong>Domaine :</strong> {{ formation.domain }}</p>
+                        {% if formation.type == 'video' %}
+                        <p class="card-text"><strong>Durée :</strong> {{ formation.duree or 'Non spécifiée' }}</p>
+                        <a href="{{ formation.link }}" target="_blank" class="btn btn-primary w-100">Regarder</a>
+                        {% elif formation.type == 'pdf' %}
+                        <p class="card-text"><strong>Taille :</strong> 
+                            {% try %}
+                                {{ "%.2f" | format(formation.taille | float) }} Mo
+                            {% except ValueError %}
+                                {{ formation.taille }}
+                            {% endtry %}
+                        </p>
+                        <a href="{{ url_for('download_formation', formation_id=formation.id) }}" class="btn btn-success w-100">Télécharger</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p class="text-muted">Vous n'avez ajouté aucun cours pour le moment.</p>
+            {% endif %}
+        </div>
+    </div>
+    {% include 'footer.html' %}
+</body>
+</html>

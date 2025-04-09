@@ -50,3 +50,35 @@
         margin-bottom: 10px;
     }
 }
+
+/* Style général pour la barre de navigation */
+#admin-navbar {
+    background-color: #343a40; /* Couleur de fond sombre */
+    border-bottom: 2px solid #ffc107; /* Ligne dorée en bas */
+}
+
+#admin-navbar .navbar-brand {
+    font-size: 1.5rem;
+    color: #ffc107; /* Couleur dorée pour le texte */
+}
+
+#admin-navbar .navbar-brand:hover {
+    color: #ffffff; /* Couleur blanche au survol */
+}
+
+#admin-navbar .nav-link {
+    color: #ffffff; /* Couleur blanche pour les liens */
+    font-weight: 500;
+}
+
+#admin-navbar .nav-link:hover {
+    color: #ffc107; /* Couleur dorée au survol */
+}
+
+#admin-navbar .navbar-toggler {
+    border-color: #ffc107; /* Couleur dorée pour le bouton mobile */
+}
+
+#admin-navbar .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28%255, 193, 7, 1%29' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}

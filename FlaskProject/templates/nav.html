@@ -16,7 +16,7 @@
                 {% if current_user.is_authenticated %}
                     <!-- Utilisateur connecté -->
                     <li class="nav-item">
-                        <a class="nav-link active fw-semibold" href="{{ url_for('dashboard') }}">Accueil</a>
+                        <a class="nav-link active fw-semibold" href="{% if current_user.role == 'admin' %}{{ url_for('admin_dashboard') }}{% else %}{{ url_for('dashboard') }}{% endif %}">Accueil</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link fw-semibold" href="{{ url_for('logout') }}">Déconnexion</a>

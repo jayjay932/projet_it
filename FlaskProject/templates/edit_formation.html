@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier une Formation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_nav.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_footer.css') }}">
+</head>
+<body>
+    {% include 'nav.html' %}
+    <h1>Modifier la Formation</h1>
+    <form method="POST" action="{{ url_for('edit_formation', formation_id=formation.id) }}">
+        <label for="title">Titre :</label>
+        <input type="text" id="title" name="title" value="{{ formation.title }}" required>
+        <br>
+        <label for="description">Description :</label>
+        <textarea id="description" name="description" required>{{ formation.description }}</textarea>
+        <br>
+        <label for="domain">Domaine :</label>
+        <select name="domain" id="domain" required>
+            <option value="Développement Web" {% if formation.domain == 'Développement Web' %}selected{% endif %}>Développement Web</option>
+            <option value="Intelligence Artificielle" {% if formation.domain == 'Intelligence Artificielle' %}selected{% endif %}>Intelligence Artificielle</option>
+            <option value="Finance et Comptabilité" {% if formation.domain == 'Finance et Comptabilité' %}selected{% endif %}>Finance et Comptabilité</option>
+            <option value="Marketing Digital" {% if formation.domain == 'Marketing Digital' %}selected{% endif %}>Marketing Digital</option>
+            <option value="Santé et Bien-être" {% if formation.domain == 'Santé et Bien-être' %}selected{% endif %}>Santé et Bien-être</option>
+        </select>
+        <br>
+        <label for="type">Type :</label>
+        <select id="type" name="type" required>
+            <option value="video" {% if formation.type == 'video' %}selected{% endif %}>Vidéo</option>
+            <option value="pdf" {% if formation.type == 'pdf' %}selected{% endif %}>PDF</option>
+        </select>
+        <br>
+        <button type="submit">Modifier la formation</button>
+    </form>
+    <a href="{{ url_for('admin_dashboard') }}">Retour au tableau de bord</a>
+    {% include 'footer.html' %}
+</body>
+</html>

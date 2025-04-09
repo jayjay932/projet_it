@@ -18,7 +18,6 @@
         <div class="ratio ratio-16x9">
             <iframe src="{{ formation.link }}" frameborder="0" allowfullscreen></iframe>
         </div>
-        <p class="card-text"><strong>Durée :</strong> {{ formation.duration }}</p>
         {% elif formation.type == 'pdf' %}
         <a href="{{ formation.link }}" class="btn btn-success mt-3" target="_blank">Télécharger le PDF</a>
         {% endif %}

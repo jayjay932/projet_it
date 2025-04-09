@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter une Formation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-secondary mb-4">Ajouter une Formation</h2>
+        <form method="POST" action="{{ url_for('apprenant_add_formation') }}">
+            <div class="mb-3">
+                <label for="title" class="form-label">Titre</label>
+                <input type="text" class="form-control" id="title" name="title" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="domain" class="form-label">Domaine</label>
+                <select id="domain" name="domain" class="form-select" required>
+                    <option value="Développement Web">Développement Web</option>
+                    <option value="Intelligence Artificielle">Intelligence Artificielle</option>
+                    <option value="Finance et Comptabilité">Finance et Comptabilité</option>
+                    <option value="Marketing Digital">Marketing Digital</option>
+                    <option value="Santé et Bien-être">Santé et Bien-être</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="link" class="form-label">Lien</label>
+                <input type="url" class="form-control" id="link" name="link" required>
+            </div>
+            <div class="mb-3">
+                <label for="type" class="form-label">Type</label>
+                <select id="type" name="type" class="form-select" required>
+                    <option value="video">Vidéo</option>
+                    <option value="pdf">PDF</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+        </form>
+    </div>
+</body>
+</html>

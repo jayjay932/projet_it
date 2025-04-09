@@ -12,30 +12,19 @@
     {% include 'nav.html' %}
     <div class="container mt-5">
         <h1 class="text-primary">Formations - {{ domain }}</h1>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Titre</th>
-                    <th>Description</th>
-                    <th>Durée</th>
-                    <th>Type</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for formation in formations %}
-                <tr>
-                    <td>{{ formation.title }}</td>
-                    <td>{{ formation.description }}</td>
-                    <td>{{ formation.duration if formation.type == 'video' else 'N/A' }}</td>
-                    <td>{{ formation.type }}</td>
-                    <td>
-                        <a href="{{ url_for('formation_detail', formation_id=formation.id) }}" class="btn btn-primary btn-sm">Détails</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="row">
+            {% for formation in formations %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ formation.title }}</h3>
+                        <p class="card-text">{{ formation.description }}</p>
+                        <a href="{{ url_for('formation_detail', formation_id=formation.id) }}" class="btn btn-primary">Voir les détails</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
         <a href="{{ url_for('dashboard') }}" class="btn btn-secondary mt-3">Retour</a>
     </div>
     {% include 'footer.html' %}

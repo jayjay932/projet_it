@@ -6,25 +6,81 @@
     <title>Ajouter une Formation</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style_nav.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style_footer.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #343a40;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        input, select, textarea {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     {% include 'nav.html' %}
     <h1>Ajouter une Formation</h1>
-    <form action="/admin/add_formation" method="POST">
+    <form method="POST" action="{{ url_for('add_formation') }}" enctype="multipart/form-data">
         <label for="title">Titre :</label>
         <input type="text" id="title" name="title" required>
         <br>
         <label for="description">Description :</label>
         <textarea id="description" name="description" required></textarea>
         <br>
-        <label for="domain">Domaine :</label>
-        <select id="domain" name="domain" required>
-            <option value="Développement Web">Développement Web</option>
-            <option value="Intelligence Artificielle">Intelligence Artificielle</option>
-            <option value="Finance et Comptabilité">Finance et Comptabilité</option>
-            <option value="Marketing Digital">Marketing Digital</option>
-            <option value="Santé et Bien-être">Santé et Bien-être</option>
-        </select>
+        <div>
+            <label for="domain">Domaine :</label>
+            <select name="domain" id="domain" required>
+                <option value="Développement Web">Développement Web</option>
+                <option value="Intelligence Artificielle">Intelligence Artificielle</option>
+                <option value="Finance et Comptabilité">Finance et Comptabilité</option>
+                <option value="Marketing Digital">Marketing Digital</option>
+                <option value="Santé et Bien-être">Santé et Bien-être</option>
+            </select>
+        </div>
         <br>
         <label for="type">Type :</label>
         <select id="type" name="type" required>
@@ -33,11 +89,71 @@
         </select>
         <br>
         <label for="link">Lien :</label>
-        <input type="url" id="link" name="link" required>
+        <input type="url" id="link" name="link">
         <br>
-        <button type="submit">Ajouter</button>
+        <label for="duration">Durée (en minutes) :</label>
+        <input type="number" id="duration" name="duration" min="1">
+        <br>
+        <label for="size">Taille (en Mo) :</label>
+        <input type="number" id="size" name="size" min="0.1" step="0.01">
+        <br>
+        <div>
+            <label for="file">Télécharger un fichier (PDF ou MP4) :</label>
+            <input type="file" name="file" id="file" onchange="toggleLinkRequirement(); autoFillFields()">
+        </div>
+        <button type="submit">Ajouter la formation</button>
     </form>
     <a href="/admin">Retour au tableau de bord</a>
     {% include 'footer.html' %}
+
+    <script>
+        function toggleLinkRequirement() {
+            const fileInput = document.getElementById('file');
+            const linkInput = document.getElementById('link');
+
+            if (fileInput.files.length > 0) {
+                linkInput.required = false; // Désactiver la nécessité du lien si un fichier est téléchargé
+            } else {
+                linkInput.required = true; // Rendre le lien obligatoire si aucun fichier n'est téléchargé
+            }
+        }
+
+        function autoFillFields() {
+            const fileInput = document.getElementById('file');
+            const titleInput = document.getElementById('title');
+            const descriptionInput = document.getElementById('description');
+            const sizeInput = document.getElementById('size');
+            const durationInput = document.getElementById('duration');
+            const typeSelect = document.getElementById('type');
+
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                const fileName = file.name.split('.').slice(0, -1).join('.'); // Nom sans extension
+                const fileSize = (file.size / (1024 * 1024)).toFixed(2); // Taille en Mo
+                const fileExtension = file.name.split('.').pop().toLowerCase(); // Extension du fichier
+
+                // Liste des extensions vidéo courantes
+                const videoExtensions = ['mp4', 'avi', 'mov', 'mkv', 'flv', 'wmv', 'webm'];
+
+                // Remplir automatiquement le titre et la description
+                titleInput.value = fileName;
+                descriptionInput.value = `Formation ajoutée automatiquement pour le fichier ${file.name}.`;
+
+                // Déterminer automatiquement le type et remplir les champs correspondants
+                if (fileExtension === 'pdf') {
+                    typeSelect.value = 'pdf';
+                    sizeInput.value = fileSize;
+                    durationInput.value = ''; // Effacer la durée pour les PDF
+                } else if (videoExtensions.includes(fileExtension)) {
+                    typeSelect.value = 'video';
+                    sizeInput.value = ''; // Effacer la taille pour les vidéos
+                    alert("La durée sera calculée automatiquement après l'envoi.");
+                } else {
+                    alert("Type de fichier non pris en charge. Veuillez télécharger un fichier PDF ou un format vidéo valide.");
+                    fileInput.value = ''; // Réinitialiser le champ fichier
+                }
+            }
+        }
+    </script>
 </body>
 </html>

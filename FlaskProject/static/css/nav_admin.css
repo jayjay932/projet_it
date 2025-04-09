@@ -1,0 +1,46 @@
+/* Style général pour la barre de navigation admin */
+#admin-navbar {
+    background-color: #212529; /* Couleur sombre professionnelle */
+    border-bottom: 3px solid #ffc107; /* Ligne dorée en bas */
+}
+
+#admin-navbar .navbar-brand {
+    font-size: 1.5rem;
+    color: #ffc107; /* Couleur dorée pour le texte */
+    display: flex;
+    align-items: center;
+}
+
+#admin-navbar .navbar-brand:hover {
+    color: #ffffff; /* Couleur blanche au survol */
+}
+
+#admin-navbar .nav-link {
+    color: #ffffff; /* Couleur blanche pour les liens */
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+#admin-navbar .nav-link:hover {
+    color: #ffc107; /* Couleur dorée au survol */
+}
+
+#admin-navbar .nav-link.text-danger {
+    color: #dc3545; /* Couleur rouge pour la déconnexion */
+}
+
+#admin-navbar .nav-link.text-danger:hover {
+    color: #ff6b6b; /* Rouge clair au survol */
+}
+
+#admin-navbar .bi {
+    font-size: 1.2rem; /* Taille des icônes */
+}
+
+#admin-navbar .navbar-toggler {
+    border-color: #ffc107; /* Couleur dorée pour le bouton mobile */
+}
+
+#admin-navbar .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28%255, 193, 7, 1%29' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}

@@ -4,19 +4,101 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
     <link rel="stylesheet" href="{{ url_for('static', filename='style_nav.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style_footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_admin_dashboard.css') }}">
 </head>
 <body>
     {% include 'nav.html' %}
-    <h1>Bienvenue, Admin {{ name }}</h1>
-    <p>Voici votre tableau de bord administrateur.</p>
+    <div class="container">
+        <div class="sidebar" id="sidebar" style="margin-top: 20px;">
+            <h2>Actions</h2>
+            <a href="/admin/add_formation_page" class="btn btn-primary">Ajouter une nouvelle formation</a>
+            <a href="/admin/users" class="btn btn-secondary">Gérer les utilisateurs</a>
+            <a href="/logout" class="btn btn-danger">Se déconnecter</a>
+        </div>
+        <div class="content">
+            <button id="toggleSidebar" class="btn btn-info">☰</button>
+            <h1>Bienvenue, Admin {{ name }}</h1>
+            <p>Voici votre tableau de bord administrateur.</p>
 
-    <a href="/admin/add_formation_page">Ajouter une nouvelle formation</a>
-    <br>
-    <a href="/formations/Développement Web">Voir les formations en Développement Web</a>
-    <br>
-    <a href="/logout">Se déconnecter</a> <!-- Lien pour la déconnexion -->
+            <!-- Filtres -->
+            <form method="GET" action="{{ url_for('admin_dashboard_view') }}" class="mb-4">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="filterDomain" class="form-label">Filtrer par domaine</label>
+                        <select id="filterDomain" name="domain" class="form-select">
+                            <option value="" {% if not selected_domain %}selected{% endif %}>Tous les domaines</option>
+                            <option value="Développement Web" {% if selected_domain == 'Développement Web' %}selected{% endif %}>Développement Web</option>
+                            <option value="Intelligence Artificielle" {% if selected_domain == 'Intelligence Artificielle' %}selected{% endif %}>Intelligence Artificielle</option>
+                            <option value="Finance et Comptabilité" {% if selected_domain == 'Finance et Comptabilité' %}selected{% endif %}>Finance et Comptabilité</option>
+                            <option value="Marketing Digital" {% if selected_domain == 'Marketing Digital' %}selected{% endif %}>Marketing Digital</option>
+                            <option value="Santé et Bien-être" {% if selected_domain == 'Santé et Bien-être' %}selected{% endif %}>Santé et Bien-être</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="filterType" class="form-label">Filtrer par type</label>
+                        <select id="filterType" name="type" class="form-select">
+                            <option value="" {% if not selected_type %}selected{% endif %}>Tous les types</option>
+                            <option value="video" {% if selected_type == 'video' %}selected{% endif %}>Vidéo</option>
+                            <option value="pdf" {% if selected_type == 'pdf' %}selected{% endif %}>PDF</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary w-100">Appliquer les filtres</button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Liste des formations -->
+            <h2>Liste des Formations</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Titre</th>
+                        <th>Description</th>
+                        <th>Domaine</th>
+                        <th>Type</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if formations %}
+                    {% for formation in formations %}
+                    <tr>
+                        <td>{{ formation.id }}</td>
+                        <td>{{ formation.title }}</td>
+                        <td>{{ formation.description }}</td>
+                        <td>{{ formation.domain }}</td>
+                        <td>{{ formation.type }}</td>
+                        <td>
+                            <a href="{{ url_for('formation_detail', formation_id=formation.id) }}" class="btn btn-info btn-sm">Voir</a>
+                            <a href="{{ url_for('edit_formation', formation_id=formation.id) }}" class="btn btn-warning btn-sm">Modifier</a>
+                            <form action="{{ url_for('delete_formation', formation_id=formation.id) }}" method="POST" style="display:inline;">
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette formation ?');">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td colspan="6" class="text-center">Aucune formation disponible.</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
     {% include 'footer.html' %}
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const toggleButton = document.getElementById('toggleSidebar');
+
+        toggleButton.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+        });
+    </script>
 </body>
 </html>

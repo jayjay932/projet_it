@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un Utilisateur</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_nav.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_footer.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: #222;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: 600;
+            color: #555;
+        }
+        .custom-input {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 12px;
+            transition: all 0.3s ease;
+        }
+        .custom-input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+        }
+        .btn-success {
+            background-color: #007bff;
+            border: none;
+            font-weight: 600;
+            padding: 12px;
+            transition: all 0.3s ease;
+        }
+        .btn-success:hover {
+            background-color: #0056b3;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+            font-weight: 600;
+            padding: 12px;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        a {
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    {% include 'nav.html' %}
+<div class="container">
+    <h1 class="text-center">Ajouter un Utilisateur</h1>
+    <form method="POST" action="{{ url_for('add_user') }}">
+        <div class="mb-3">
+            <label for="name" class="form-label">Nom</label>
+            <input type="text" class="form-control custom-input" id="name" name="name" placeholder="Entrez le nom complet" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control custom-input" id="email" name="email" placeholder="Entrez l'adresse email" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Mot de passe</label>
+            <input type="password" class="form-control custom-input" id="password" name="password" placeholder="Entrez un mot de passe sécurisé" required>
+        </div>
+        <div class="mb-3">
+            <label for="role" class="form-label">Rôle</label>
+            <select class="form-select custom-input" id="role" name="role" required>
+                <option value="admin">Administrateur</option>
+                <option value="apprenant">Apprenant</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success w-100">Ajouter</button>
+    </form>
+    <a href="{{ url_for('admin_users') }}" class="btn btn-secondary mt-3 w-100">Retour à la gestion des utilisateurs</a>
+</div>
+{% include 'footer.html' %}
+</body>
+</html>
+
